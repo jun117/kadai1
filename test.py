@@ -12,10 +12,11 @@ def search_news(dic_list):
     url = f"https://hacker-news.firebaseio.com/v0/item/{dic_list}.json"
     response = requests.get(url)
     dic = response.json()
-    news_title = dic["title"]
-    news_link = dic["url"]
-    results = f"'title':'{news_title}','link':'{news_link}'"
-    return results
+    if 'url' in dic:
+        news_title = dic["title"]
+        news_link = dic["url"]
+        results = f"'title':'{news_title}','link':'{news_link}'"
+        return results
 
 
 def main():
