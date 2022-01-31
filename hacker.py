@@ -1,17 +1,17 @@
 import requests
 
-topstories = "8863"
-url = f"https://hacker-news.firebaseio.com/v0/item/{topstories}.json"
+url_list = "https://hacker-news.firebaseio.com/v0/topstories.json"
+response_list = requests.get(url_list)
 
-response = requests.get(url)
+dic_lists = response_list.json()
 
-dic = response.json()
-news_title = dic["title"]
-news_link = dic["url"]
-print(f"'title':'{news_title}','link':'{news_link}'")
+for dic_list in dic_lists:
+    url = f"https://hacker-news.firebaseio.com/v0/item/{dic_list}.json"
 
-"""
-print((response))
-print(response.json()['id'])
-print(type(response.json()))
-"""
+    response = requests.get(url)
+
+    dic = response.json()
+    news_title = dic["title"]
+    news_link = dic["url"]
+
+    print(f"'title':'{news_title}','link':'{news_link}'")
