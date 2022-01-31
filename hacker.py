@@ -1,8 +1,17 @@
 import requests
 
-url = "https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty"
+topstories = "8863"
+url = f"https://hacker-news.firebaseio.com/v0/item/{topstories}.json"
 
 response = requests.get(url)
 
-print(response)
-print(response.text)
+dic = response.json()
+news_title = dic["title"]
+news_link = dic["url"]
+print(f"'title':'{news_title}','link':'{news_link}'")
+
+"""
+print((response))
+print(response.json()['id'])
+print(type(response.json()))
+"""
