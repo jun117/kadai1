@@ -3,15 +3,21 @@ import time
 
 
 def main():
-    response_list = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json")
+    url_list = "https://hacker-news.firebaseio.com/v0/topstories.json"
+    response_list = requests.get(url_list)
+
     dic_lists = response_list.json()
 
     for dic_list in dic_lists:
         url_text = f"https://hacker-news.firebaseio.com/v0/item/{dic_list}.json"
+
         response = requests.get(url_text)
-        if 'url' in response.json():
-            news_title = response.json()['title']
-            news_link = response.json()['url']
+
+        dic = response.json()
+
+        if 'url' in dic:
+            news_title = dic['title']
+            news_link = dic['url']
             for i in range(3):
                 time.sleep(1)
 
